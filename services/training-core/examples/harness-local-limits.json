@@ -1,0 +1,9 @@
+{
+  "max_seconds_per_model": 1200,
+  "max_process_gib": 5.0,
+  "min_available_gib": 2.0,
+  "max_swap_growth_gib": 0.5,
+  "min_disk_free_gib": 8.0,
+  "max_output_mib": 256,
+  "mps_memory_fraction": 0.3
+}

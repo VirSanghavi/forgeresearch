@@ -1,0 +1,16 @@
+# Vercel serves only the Next.js app: the landing page at / and the lab UI at /lab.
+# Everything else (Python services, actors, training core, data, docs, tests) stays out.
+/*
+!/app
+!/components
+!/lib
+!/public
+!/scripts
+/scripts/*
+!/scripts/verify-relay-native.mjs
+!/package.json
+!/package-lock.json
+!/next.config.ts
+!/next-env.d.ts
+!/tsconfig.json
+!/eslint.config.mjs

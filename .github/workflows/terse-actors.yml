@@ -1,0 +1,42 @@
+name: Terse actors
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'packages/terse-actors/**'
+      - '.github/workflows/terse-actors.yml'
+  pull_request:
+    paths:
+      - 'packages/terse-actors/**'
+      - '.github/workflows/terse-actors.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: packages/terse-actors
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: packages/terse-actors/package-lock.json
+      - name: Install pinned SDK and Bun
+        run: npm ci --no-audit --no-fund
+      - name: Typecheck and format
+        run: |
+          npm run check
+          npm run format:check
+      - name: Compile real actor contracts
+        run: npm run generate
+      - name: Native runtime integration and crash recovery
+        run: npm test
+      - name: Coordination demo
+        run: npm run demo

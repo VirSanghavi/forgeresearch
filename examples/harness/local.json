@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "name": "artifact-handoff",
+  "max_parallel": 2,
+  "max_seconds": 60,
+  "tasks": [
+    {
+      "id": "produce",
+      "command": ["{python}", "-c", "import json; from pathlib import Path; Path('metrics.json').write_text(json.dumps({'baseline': 3, 'candidate': 5, 'examples': 8}))"],
+      "outputs": ["metrics.json"]
+    },
+    {
+      "id": "review",
+      "needs": ["produce"],
+      "inputs": [{"path": "metrics.json", "task": "produce", "source": "metrics.json"}],
+      "command": ["{python}", "-c", "import json; from pathlib import Path; m=json.loads(Path('metrics.json').read_text()); assert 0 <= m['baseline'] < m['candidate'] <= m['examples']; Path('review.json').write_text(json.dumps({'fixture_only': True, 'counts_valid': True}))"],
+      "outputs": ["review.json"],
+      "checks": [{"artifact": "review.json", "pointer": "/counts_valid", "operator": "eq", "value": true}]
+    }
+  ]
+}

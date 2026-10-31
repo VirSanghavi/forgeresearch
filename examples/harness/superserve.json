@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "name": "superserve-roundtrip",
+  "max_seconds": 300,
+  "tasks": [
+    {
+      "id": "sandbox-probe",
+      "backend": "superserve",
+      "timeout_seconds": 120,
+      "command": ["{python}", "-c", "import json, platform; from pathlib import Path; Path('environment.json').write_text(json.dumps({'system': platform.system(), 'python': platform.python_version()}))"],
+      "outputs": ["environment.json"]
+    },
+    {
+      "id": "verify-on-host",
+      "needs": ["sandbox-probe"],
+      "inputs": [{"path": "environment.json", "task": "sandbox-probe", "source": "environment.json"}],
+      "command": ["{python}", "-c", "import json; from pathlib import Path; result=json.loads(Path('environment.json').read_text()); assert result['system'] == 'Linux'; print(json.dumps(result))"]
+    }
+  ]
+}

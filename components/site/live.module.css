@@ -1,0 +1,603 @@
+/* Live illustrations on /site. Tokens match components/site/site.module.css. */
+.card,
+.example,
+.art {
+  --fg: #111111;
+  --muted: #5c5c5c;
+  --dim: #6b6b6b;
+  --line: #ebebeb;
+  --line-strong: #dcdcdc;
+  --chip: #f2f2f2;
+  --surface: #ffffff;
+  --surface-2: #fafafa;
+  --panel: #f6f6f6;
+  --hairline: rgba(0, 0, 0, 0.05);
+  --ghost: rgba(0, 0, 0, 0.05);
+  --ink: #111111;
+  --ink-on: #ffffff;
+  --kill: #b42318;
+  --hatch-a: #c4c4c4;
+  --hatch-b: #e6e6e6;
+  --mark: #fff1a8;
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --mono: var(--site-mono), "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--fg);
+}
+
+.kicker {
+  display: block;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0.39px;
+  color: var(--muted);
+}
+
+/* Motion primitive: the measured figure transition (opacity, 16px, 3px blur). */
+.rise {
+  animation: rise 250ms var(--ease-out) both;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+    filter: blur(3px);
+  }
+}
+
+.flagList,
+.flow,
+.actors {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.flagList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.flagRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 7px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.flagRow {
+  opacity: 0.4;
+  transition: opacity 250ms var(--ease-out);
+}
+.flagRow .chips {
+  opacity: 0;
+  translate: 0 4px;
+  transition:
+    opacity 250ms var(--ease-out),
+    translate 250ms var(--ease-out);
+}
+.flagOn,
+.flagOn .chips {
+  opacity: 1;
+  translate: 0 0;
+}
+.flagQ {
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.chip,
+.route {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: 4px;
+  background: var(--chip);
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--fg);
+  white-space: nowrap;
+}
+
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--ink-on);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 1;
+}
+
+/* ---------- Hero art (three.js points) ---------- */
+.art {
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.artTabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+.artCanvas {
+  position: relative;
+  width: 100%;
+  height: 520px;
+}
+.artCanvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+.artCaption {
+  min-height: 22px;
+  margin: 8px 0 0;
+  font-size: 15px;
+  line-height: 22px;
+  letter-spacing: 0.15px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.stepTab {
+  height: 28px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 48px;
+  font-size: 14px;
+  color: var(--dim);
+  transition:
+    color 200ms var(--ease-out),
+    background-color 200ms var(--ease-out);
+}
+
+.stepTabOn {
+  color: var(--fg);
+  background: var(--ghost);
+}
+
+/* ---------- Shared card ---------- */
+.card {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  overflow: hidden;
+  text-align: left;
+}
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 44px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Audit */
+
+/* Agents */
+.roles {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.role {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--dim);
+  opacity: 0.45;
+  transition:
+    opacity 250ms var(--ease-out),
+    color 250ms var(--ease-out);
+}
+.roleOn {
+  opacity: 1;
+  color: var(--fg);
+}
+.roleFrom .avatar {
+  box-shadow:
+    0 0 0 2px var(--surface),
+    0 0 0 3px var(--ink);
+}
+.flow {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: 336px;
+  padding: 16px;
+}
+.flowRow {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+}
+.flowMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.flowWho {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+}
+.flowText {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--fg);
+}
+.receipt {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 250ms var(--ease-out);
+}
+.receiptOn {
+  opacity: 1;
+}
+
+/* Recovery */
+.timeline {
+  padding: 24px 16px 8px;
+}
+.track {
+  position: relative;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--chip);
+  overflow: hidden;
+}
+.segKill,
+.segHold,
+.segBack {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.segKill {
+  background: var(--kill);
+}
+.segHold {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--hatch-a) 0 4px,
+    var(--hatch-b) 4px 8px
+  );
+}
+.segBack {
+  background: var(--ink);
+}
+.playhead {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--ink);
+}
+
+.cells {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 16px;
+  background: var(--line);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.cell {
+  padding: 14px 16px;
+  background: var(--surface);
+  opacity: 0.35;
+  transition: opacity 250ms var(--ease-out);
+}
+.cellOn {
+  opacity: 1;
+}
+.cell strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 500;
+}
+.cell p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  line-height: 17px;
+  color: var(--muted);
+}
+.actors {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+  padding: 16px;
+}
+.actors li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--dim);
+  opacity: 0.4;
+  transition: opacity 250ms var(--ease-out);
+}
+
+.actors li > span:last-child {
+  margin-left: auto;
+}
+.actors .actorOn {
+  opacity: 1;
+}
+
+/* Code */
+
+/* Before / after transcripts */
+.example {
+  margin-top: 80px;
+}
+.exampleQ {
+  border-radius: 7px;
+  border: 1px solid var(--hairline);
+  background: var(--panel);
+  padding: 32px;
+}
+.exampleQ p {
+  margin: 8px 0 0;
+  max-width: 900px;
+  font-size: 22px;
+  line-height: 30px;
+  letter-spacing: -0.2px;
+  text-wrap: pretty;
+}
+.exampleCols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.exampleCol {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  overflow: hidden;
+}
+.exampleHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.exampleHead strong {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+.exampleHead span {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--dim);
+}
+.transcript {
+  margin: 0;
+  padding: 20px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 21px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.mark {
+  background: var(--mark);
+  color: inherit;
+  border-radius: 3px;
+  box-shadow: 0 0 0 2px var(--mark);
+}
+.exampleFoot {
+  margin-top: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--muted);
+}
+.verdict {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  height: 20px;
+  padding: 0 8px 0 6px;
+  border-radius: 4px;
+  background: var(--chip);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fg);
+}
+.verdictOk {
+  background: var(--ink);
+  color: var(--ink-on);
+}
+.exampleNote {
+  margin: 16px 0 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--dim);
+}
+
+@media (max-width: 1023px) {
+  .exampleCols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .artCanvas {
+    height: 300px;
+  }
+  .stepTab {
+    padding: 0 8px;
+    font-size: 13px;
+  }
+
+  .roles span:last-child {
+    font-size: 11px;
+  }
+  .cell strong {
+    font-size: 22px;
+  }
+  .actors {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .exampleQ {
+    padding: 20px;
+  }
+  .exampleQ p {
+    font-size: 19px;
+    line-height: 27px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .receipt,
+  .cell,
+  .role,
+  .actors li,
+  .flagRow,
+  .flagRow .chips {
+    animation: none;
+    transition: none;
+  }
+}
+
+.cellTitle {
+  display: block;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 500;
+}
+.card .flagList {
+  padding: 16px;
+  min-height: 352px;
+}
+.ship {
+  list-style: none;
+  margin: 0;
+  padding: 8px 16px 16px;
+  display: flex;
+  flex-direction: column;
+}
+.ship li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  opacity: 0.4;
+  transition: opacity 250ms var(--ease-out);
+}
+.ship li:last-child {
+  border-bottom: 0;
+}
+.ship .shipOn {
+  opacity: 1;
+}
+.ship li > span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ship strong {
+  font-size: 17px;
+  line-height: 24px;
+  font-weight: 500;
+}
+.ship li > span:last-child > span {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--muted);
+}
+.tick {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: var(--chip);
+  flex: 0 0 auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ship li {
+    transition: none;
+  }
+}
+
+/* Dark theme: an authored palette, not an inversion. Contrast on --surface #161616:
+   fg 15.0:1, muted 7.2:1, dim 5.6:1. */
+:global(html[data-site-theme="dark"]) .card,
+:global(html[data-site-theme="dark"]) .example,
+:global(html[data-site-theme="dark"]) .art {
+  --fg: #ededed;
+  --muted: #a3a3a3;
+  --dim: #919191;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.14);
+  --chip: rgba(255, 255, 255, 0.08);
+  --surface: #161616;
+  --surface-2: #1c1c1c;
+  --panel: #141414;
+  --hairline: rgba(255, 255, 255, 0.06);
+  --ghost: rgba(255, 255, 255, 0.08);
+  --ink: #ededed;
+  --ink-on: #0e0e0e;
+  --kill: #f0614f;
+  --hatch-a: #3a3a3a;
+  --hatch-b: #242424;
+  --mark: rgba(250, 204, 21, 0.26);
+}

@@ -1,0 +1,5 @@
+node_modules/
+.durable-actors/
+artifacts/
+.env
+*.private.pem

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "campaign_id": "qwen-math-development",
+  "experiment_id": "sft-lora-001",
+  "model": {
+    "source": "hub",
+    "model_status": "instruct",
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+  },
+  "train": {
+    "records": "../data/gsm8k/train.jsonl",
+    "manifest": "../data/gsm8k/train.manifest.json"
+  },
+  "development": {
+    "records": "../data/gsm8k/development.jsonl",
+    "manifest": "../data/gsm8k/development.manifest.json"
+  },
+  "training": {
+    "method": "sft_lora",
+    "learning_rate": 0.0001,
+    "max_steps": 100,
+    "batch_size": 1,
+    "gradient_accumulation_steps": 4,
+    "max_sequence_length": 1024,
+    "lora_rank": 8,
+    "lora_alpha": 16,
+    "target_modules": ["q_proj", "v_proj"],
+    "max_seconds": 1800,
+    "max_training_tokens": 500000
+  },
+  "evaluation": {
+    "scorer": "forge_numeric_v1",
+    "max_new_tokens": 256,
+    "max_prompt_tokens": 1024,
+    "max_seconds": 1800
+  },
+  "seed": 42,
+  "device": "cuda",
+  "precision": "bfloat16",
+  "max_model_parameters": 600000000,
+  "output_dir": "../artifacts/qwen-sft-001"
+}

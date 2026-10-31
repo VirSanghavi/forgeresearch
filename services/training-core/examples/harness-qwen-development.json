@@ -1,0 +1,9 @@
+{
+  "num_fewshot": 0,
+  "apply_chat_template": true,
+  "max_new_tokens": 512,
+  "max_prompt_tokens": 1024,
+  "device": "mps",
+  "precision": "float32",
+  "seed": 42
+}

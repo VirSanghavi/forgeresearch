@@ -1,0 +1,11 @@
+[project]
+name = "actors"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = ["durable-actors==0.14.0"]
+
+[dependency-groups]
+dev = ["durable-actors[cli]==0.14.0"]
+
+[tool.mypy]
+strict = true

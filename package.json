@@ -1,0 +1,50 @@
+{
+  "name": "forge-research-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "postinstall": "node scripts/verify-relay-native.mjs",
+    "dev": "next dev --hostname 127.0.0.1 --port 3000",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1 --port 3000",
+    "typecheck": "next typegen && tsc --noEmit",
+    "lint": "eslint .",
+    "test:relay": "node scripts/check-relay.mjs",
+    "test": ".venv/bin/python -m pytest tests -q",
+    "setup": "node scripts/setup.mjs",
+    "lab": "node scripts/setup.mjs --check && .venv/bin/python scripts/lab.py",
+    "add-data": "node scripts/setup.mjs --check && .venv/bin/python scripts/add_data.py",
+    "harness": ".venv/bin/python -m services.harness",
+    "hephaestus": "caffeinate -i .venv/bin/python -m services.core.hephaestus supervise",
+    "format:check": "prettier --check 'app/**/*.{ts,tsx,css}' 'components/**/*.{ts,tsx}' 'lib/**/*.ts' next.config.ts"
+  },
+  "dependencies": {
+    "@agent-relay/sdk": "14.0.0",
+    "@hono/node-server": "2.1.3",
+    "@relaycast/engine": "12.0.0",
+    "@relaycast/sdk": "8.16.0",
+    "next": "16.4.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "three": "0.180.0",
+    "zod": "4.6.7"
+  },
+  "overrides": {
+    "@hono/node-server": "2.1.3",
+    "undici": "7.30.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/three": "0.180.0",
+    "eslint": "^9.39.0",
+    "eslint-config-next": "16.4.3",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}

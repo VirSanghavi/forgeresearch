@@ -1,0 +1,25 @@
+{
+  "name": "@forge/terse-actors",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "generate": "bun node_modules/durable-actors/bin/durable-actors.js generate src/actors.ts --out-dir artifacts/generated",
+    "test": "bun test --timeout 120000",
+    "test:integration": "bun test tests/integration.test.ts --timeout 120000",
+    "demo": "bun scripts/demo.ts",
+    "format": "prettier --write src tests scripts",
+    "format:check": "prettier --check src tests scripts"
+  },
+  "dependencies": {
+    "durable-actors": "0.14.0",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.4",
+    "bun": "1.4.2",
+    "prettier": "3.9.6",
+    "typescript": "5.9.3"
+  }
+}

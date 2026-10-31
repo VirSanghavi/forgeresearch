@@ -1,0 +1,27 @@
+{
+  "name": "@forge/orchestrator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "bun test --timeout 120000",
+    "format": "prettier --write src scripts tests",
+    "format:check": "prettier --check src scripts tests",
+    "demo": "bun scripts/demo.ts",
+    "research": "bun scripts/research.ts"
+  },
+  "dependencies": {
+    "@agent-relay/sdk": "14.0.0",
+    "durable-actors": "0.14.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@hono/node-server": "1.19.17",
+    "@relaycast/engine": "12.0.0",
+    "@types/bun": "1.4.4",
+    "bun": "1.4.2",
+    "prettier": "3.9.6",
+    "typescript": "5.9.3"
+  }
+}

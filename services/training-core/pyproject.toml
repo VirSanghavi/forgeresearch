@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forge-training-core"
+version = "0.1.0"
+description = "Reproducible, bounded LoRA training and development evaluation for Forge"
+requires-python = ">=3.11"
+dependencies = ["pydantic==2.12.3"]
+
+[project.optional-dependencies]
+train = [
+  "torch==2.9.0",
+  "transformers==4.57.1",
+  "peft==0.17.1",
+  "accelerate==1.11.0",
+  "tokenizers==0.22.1",
+  "numpy==2.3.4",
+  # GRPO: TRL 0.24.0 is the release built against Transformers 4.57.
+  "trl==0.24.0",
+  "datasets==4.3.0",
+  "psutil==7.2.2",
+]
+data = ["datasets==4.3.0"]
+test = ["pytest==8.4.2", "ruff==0.14.3"]
+harness = ["lm_eval==0.4.9.2", "psutil==7.2.2"]
+# JSON-schema checkers for structured-extraction tasks.
+tasks = ["jsonschema==4.26.0"]
+
+[project.scripts]
+forge-train = "forge_training.cli:main"
+forge-harness = "forge_training.harness_cli:main"
+forge-final = "forge_training.final_cli:main"
+forge-distill = "forge_training.distill_cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: executes real PyTorch optimization and checkpoint reload"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

@@ -1,0 +1,13 @@
+{
+  "variants": [
+    { "name": "reference" },
+    { "name": "long-cap", "max_new_tokens": 1024 },
+    { "name": "plain-prompt", "apply_chat_template": false },
+    {
+      "name": "five-shot",
+      "apply_chat_template": false,
+      "num_fewshot": 5,
+      "max_prompt_tokens": 2048
+    }
+  ]
+}

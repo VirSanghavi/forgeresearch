@@ -1,0 +1,50 @@
+{
+  "attention_implementation": "eager",
+  "campaign_id": "performance-qwen-development",
+  "development": {
+    "records": "../data/performance/development.jsonl",
+    "manifest": "../data/performance/development.manifest.json"
+  },
+  "device": "mps",
+  "evaluation": {
+    "batch_size": 1,
+    "max_new_tokens": 256,
+    "max_prompt_tokens": 1024,
+    "max_seconds": 1500,
+    "scorer": "forge_numeric_v1"
+  },
+  "experiment_id": "qv-r8-128-memory-bounded",
+  "max_model_parameters": 700000000,
+  "model": {
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "model_status": "instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "source": "hub"
+  },
+  "output_dir": "../artifacts/qwen-performance-r8-128",
+  "precision": "bfloat16",
+  "schema_version": 1,
+  "seed": 42,
+  "train": {
+    "records": "../data/performance/train.jsonl",
+    "manifest": "../data/performance/train.manifest.json"
+  },
+  "training": {
+    "batch_size": 1,
+    "completion_only_logits": true,
+    "gradient_accumulation_steps": 1,
+    "learning_rate": 0.0001,
+    "lora_alpha": 16,
+    "lora_rank": 8,
+    "max_seconds": 1500,
+    "max_sequence_length": 512,
+    "max_steps": 128,
+    "max_training_tokens": 400000,
+    "method": "sft_lora",
+    "target_modules": [
+      "q_proj",
+      "v_proj"
+    ]
+  },
+  "device_memory_limit_mb": 2048
+}
